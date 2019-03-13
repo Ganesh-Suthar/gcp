@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title> To Add New Account </title>
+</head>
+<body>
+    <h2> To add new Account Info </h2>
+    <form action="/addaccount">
+        <table border="1" align="center" cellspacing="10px" cellpadding="10px" 
+            style="width:30%;border-collapse: collapse;">
+            <tr>
+                <td><input type="text" name="tfAcNo" placeholder="Ac No"/></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="tfAcHName" placeholder="Ac Holder Name"/></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="tfHMNo" placeholder="Mobile No"/></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="tfAcBalance" placeholder="Ac Balance"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <label> Select City</label>
+                    <select name="ddCity">
+                        <optgroup label="Maharastra">
+                            <option> Mumbai </option>
+                            <option> Pune </option>
+                        </optgroup>
+                        <optgroup label="Karnataka">
+                            <option> Banglore </option>
+                            <option> Vallore </option>
+                        </optgroup>
+                        <optgroup label="Rajasthan">
+                            <option> Jaipur </option>
+                            <option selected> Udaipur </option>
+                        </optgroup>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit"/></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

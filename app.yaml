@@ -1,0 +1,8 @@
+application: myfirstgcp
+version: 1
+runtime: python27
+threadsafe: true
+
+handlers:
+  - url: /.*
+    script: main.start
