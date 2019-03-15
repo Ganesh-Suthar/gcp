@@ -3,7 +3,18 @@ from model import Account
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.write(open("header.html").read())
         self.response.write(open("addact.html").read())
+
+class HTMLAddAccount(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(open("header.html").read())
+        self.response.write(open("addact.html").read())
+
+class HTMLSearchAccount(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(open("header.html").read())
+        self.response.write(open("searchaccount.html").read())
 
 class AppForm(webapp2.RequestHandler):
     def get(self):
@@ -37,8 +48,31 @@ class AddAccount(webapp2.RequestHandler):
         key = act.put()
         self.response.write(key.urlsafe())
 
+class SearchAccount(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(open('header.html').read())
+        an = self.request.get("tfAcNo")
+        # query from Googe NDB
+        result = Account.query(Account.AcNo == int(an))
+        if result:
+            self.response.write("<table border='1'>")
+            for act in result:
+                self.response.write("<tr>")
+                self.response.write("<td>"+str(act.AcNo)+"</td>")
+                self.response.write("<td>"+act.AcHName+"</td>")
+                self.response.write("<td>"+str(act.AcBalance)+"</td>")
+                self.response.write("<td>"+str(act.AcMobNo)+"</td>")
+                self.response.write("<td>"+act.City+"</td>")
+                self.response.write("</tr>")
+            self.response.write("</table>")
+        else:
+            self.response.write("No Data Found")
+
 start = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/appform', AppForm),
+    ('/htmladdaccount', HTMLAddAccount),
+    ('/htmlsearchaccount', HTMLSearchAccount),
+    ('/searchaccount', SearchAccount),
     ('/addaccount', AddAccount)
 ], debug = True)

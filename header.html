@@ -1,11 +1,35 @@
 <html>
     <head>
         <title> Main Page </title>
+        <style type="text/css">
+            #header
+            {
+                height: 60px;
+                width: 100%;
+                background-color: gold;
+            }
+            #header td
+            {
+                padding: 20px;
+                border: solid 1px black;
+            }
+            a
+            {
+                text-decoration: none;
+                font: bold 20px/18px ubuntu;
+            }
+        </style>
     </head>
     <body>
-        <table>
+        <table style="width: 100%;" cellspacing="10px">
+            <tr id='header'>
+                <td><a href="/htmladdaccount"> Add Account </a></td>
+                <td><a href="/htmlsearchaccount"> Search Account </a></td>
+                <td><a href="/htmldeleteaccount"> Delete Account </a></td>
+                <td><a href="/htmlupdateaacount"> Update Account </a></td>
+            </tr>
             <tr>
-                <td><a href="/"> Add Account </a></td>
+                <td colspan="4"><hr/></td>
             </tr>
         </table>
     </body>
