@@ -87,6 +87,7 @@ class SearchAccount(webapp2.RequestHandler):
 class DeleteAccount(webapp2.RequestHandler):
     'to delete an account'
     def get(self):
+        self.response.write(open('header.html').read())
         urlsafe = self.request.get('urlsafe')
         result = Account.query()
         for item in result:
