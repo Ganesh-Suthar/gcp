@@ -1,5 +1,6 @@
 import webapp2
-from model import Account
+from model import Account, Branch
+from google.appengine.ext import ndb
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -32,6 +33,12 @@ class AddAccount(webapp2.RequestHandler):
         amn = self.request.get('tfHMNo')
         ab = self.request.get('tfAcBalance')
         city = self.request.get('ddCity')
+        # getting branch
+        bc = self.request.get('tfBC')
+        bn = self.request.get('tfBN')
+        bm = self.request.get('tfBM')
+        bp = self.request.get('tfBP')
+
         self.response.write(an+"<br/>")
         self.response.write(ahn+"<br/>")
         self.response.write(amn+"<br/>")
@@ -44,6 +51,14 @@ class AddAccount(webapp2.RequestHandler):
         act.AcMobNo = amn
         act.AcBalance = float(ab)
         act.City = city
+        # creating an instance of Branch
+        br = Branch()
+        br.BCode = int(bc)
+        br.BName = bn
+        br.BManager = bm
+        br.BPINCode = int(bp)
+        # setting to account instance
+        act.BranchInfo = br
         # storing into database
         key = act.put()
         self.response.write(key.urlsafe())
@@ -53,7 +68,7 @@ class SearchAccount(webapp2.RequestHandler):
         self.response.write(open('header.html').read())
         an = self.request.get("tfAcNo")
         # query from Googe NDB
-        result = Account.query(Account.AcNo == int(an))
+        result = Account.query(ndb.OR(Account.AcNo == int(an), Account.AcBalance >= 40000))
         if result:
             self.response.write("<table border='1'>")
             for act in result:
