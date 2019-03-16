@@ -28,6 +28,7 @@ class AppForm(webapp2.RequestHandler):
 
 class AddAccount(webapp2.RequestHandler):
     def get(self):
+        self.response.write(open('header.html').read())
         an = self.request.get('tfAcNo')
         ahn = self.request.get('tfAcHName')
         amn = self.request.get('tfHMNo')
