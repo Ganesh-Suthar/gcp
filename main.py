@@ -84,11 +84,24 @@ class SearchAccount(webapp2.RequestHandler):
         else:
             self.response.write("No Data Found")
 
+class DeleteAccount(webapp2.RequestHandler):
+    'to delete an account'
+    def get(self):
+        urlsafe = self.request.get('urlsafe')
+        result = Account.query()
+        for item in result:
+            if item.key.urlsafe() == urlsafe:
+                self.response.write(str( item.key.id() ) +"<br/>")
+                self.response.write(str( item.key.kind() )+"<br/>" )
+                self.response.write(str( item.key.urlsafe() )+"<br/>" )
+                self.response.write(str( item.key.delete() )+"<br/>" )
+
 start = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/appform', AppForm),
     ('/htmladdaccount', HTMLAddAccount),
     ('/htmlsearchaccount', HTMLSearchAccount),
     ('/searchaccount', SearchAccount),
-    ('/addaccount', AddAccount)
+    ('/addaccount', AddAccount),
+    ('/deleteaccount', DeleteAccount)
 ], debug = True)
